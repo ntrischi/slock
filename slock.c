@@ -118,8 +118,8 @@ readpw(Display *dpy, const char *pws)
 #else
 				running = strcmp(crypt(passwd, pws), pws);
 #endif
-				if(running != False)
-					bell ? XBell(dpy, 100):0;
+				if(running && bell)
+					XBell(dpy, 100);
 				len = 0;
 				break;
 			case XK_Escape:
@@ -229,7 +229,7 @@ lockscreen(Display *dpy, int screen) {
 
 static void
 usage(void) {
-	fprintf(stderr, "usage: slock [-v]\n");
+	fprintf(stderr, "usage: slock [-v] [-b]\n");
 	exit(EXIT_FAILURE);
 }
 
